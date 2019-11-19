@@ -9,7 +9,7 @@ import { authStateSelector } from 'redux/selectors'
 import { isFieldRequired } from 'helpers'
 import { login, DO_LOGIN } from 'redux/modules/auth'
 import { requestFail } from 'redux/api/request'
-
+import './Login.css'
 const renderField = ({
   input,
   label,
@@ -34,6 +34,7 @@ class Login extends Component {
 
   handleLogin = (values) => {
     const { login } = this.props
+    console.log("Login form----", values)
     login({ body: values })
   }
 
@@ -42,27 +43,35 @@ class Login extends Component {
 
     return (
       <Row>
-        <Col sm={12} md={{ size: 4, offset: 4 }}>
+        <Col sm={12} md={{ size: 6, offset: 3 }}>
           {auth.status === requestFail(DO_LOGIN) &&
             <Alert color="danger">Invalid email or password!</Alert>
           }
-          <h2 className='text-center mb-5'>Login</h2>
-          <Form onSubmit={handleSubmit(this.handleLogin)}>
-            <Field
-              label='Email'
-              name='email'
-              type='email'
-              validate={[isFieldRequired]}
-              component={renderField}
-            />
-            <Field
-              label='Password'
-              name='password'
-              type='password'
-              validate={[isFieldRequired]}
-              component={renderField}
-            />
-            <Button color='primary' type='submit'>Login</Button>
+          <h2 className='text-center mb-5 logintext'>Login</h2>
+          <Form onSubmit={handleSubmit(this.handleLogin)} className={'loginform loginform--shadow'}>
+            <Row>
+              <Col xs={12}>
+                <Field
+                label='Email'
+                name='email'
+                type='email'
+                validate={[isFieldRequired]}
+                component={renderField}
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <Field
+                label='Password'
+                name='password'
+                type='password'
+                validate={[isFieldRequired]}
+                component={renderField}
+                />
+              </Col>
+            </Row>
+            <Button color='primary' type='submit' className={'loginform-button--submit'}>Login</Button>
           </Form>
         </Col>
       </Row>

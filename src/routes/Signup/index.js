@@ -1,3 +1,2 @@
 import Signup from './Signup'
-
-export default Signup
+ export default Signup
